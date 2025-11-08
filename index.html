@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔖 BookDash</title>
+  <link rel="icon" type="image/png" href="logo.jpg">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark">
+  <div class="wrap">
+    <header>
+      <h1>🔖 BookDash</h1>
+      <button id="theme-toggle">🌞 Light</button>
+    </header>
+
+    <!-- Clocks -->
+    <div class="clock-row">
+      <div class="card">
+        <div class="clock-title">India Standard Time (IST)</div>
+        <div id="clock-ist" class="clock-time">--:--:--</div>
+        <div id="date-ist" class="clock-date"></div>
+      </div>
+      <div class="card">
+        <div class="clock-title">Central Time (CT)</div>
+        <div id="clock-ct" class="clock-time">--:--:--</div>
+        <div id="date-ct" class="clock-date"></div>
+      </div>
+      <div class="card">
+        <div class="clock-title">Coordinated Universal Time (UTC)</div>
+        <div id="clock-utc" class="clock-time">--:--:--</div>
+        <div id="date-utc" class="clock-date"></div>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search">
+      <input id="filter" class="search-bar" type="search" placeholder="Filter bookmarks…" />
+      <span class="badge" id="count">0 shown</span>
+    </div>
+
+    <!-- Dynamic Bookmark Manager -->
+    <section class="section" id="bookmark-manager">
+      <h2>📚 My Bookmarks (Dynamic)</h2>
+      <form id="bookmark-form">
+        <input type="text" id="bm-category" placeholder="Category (e.g. Work)" required>
+        <input type="text" id="bm-emoji" placeholder="Emoji (📧)" maxlength="2" required>
+        <input type="text" id="bm-label" placeholder="Label (Gmail)" required>
+        <input type="url" id="bm-url" placeholder="https://example.com" required>
+        <button type="submit">Add / Update</button>
+        <button type="button" id="bm-clear">Clear All</button>
+      </form>
+      <div id="bookmark-list"></div>
+    </section>
+
+    <!-- Google Calendar -->
+    <!-- <section class="section"> -->
+      <!-- <h2>🗓️ Google Calendar</h2> -->
+      <!-- <iframe src="https://calendar.google.com/calendar" -->
+              <!-- style="border:0" width="100%" height="600" frameborder="0" scrolling="no"></iframe> -->
+    <!-- </section> -->
+
+    <div class="footer">
+      Tip: Add, edit, or delete bookmarks directly — saved in your browser automatically.
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
