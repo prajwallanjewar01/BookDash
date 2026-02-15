@@ -102,7 +102,8 @@ function addBookmark(e) {
   e.preventDefault();
   const newBM = {
     id: editId || Date.now(),
-    category: catInput.value.trim(),
+    // category: catInput.value.trim(),
+    category: catInput.value.trim().replace(/\b\w/g, c => c.toUpperCase()),
     emoji: emojiInput.value.trim(),
     label: labelInput.value.trim(),
     url: urlInput.value.trim()
@@ -185,5 +186,48 @@ filterInput.addEventListener("input", () => {
   });
   countBadge.textContent = `${visible} shown`;
 });
+
+
+function getDayPhase(hour) {
+  if (hour >= 5 && hour < 7) {
+    return { label: "Morning - Dawn 🌅" };
+  } else if (hour >= 7 && hour < 12) {
+    return { label: "Morning ☀️" };
+  } else if (hour >= 12 && hour < 17) {
+    return { label: "Afternoon 🌤️" };
+  } else if (hour >= 17 && hour < 19) {
+    return { label: "Evening - Dusk 🌇" };
+  } else if (hour >= 19 && hour < 21) {
+    return { label: "Evening 🌆" };
+  } else {
+    return { label: "Night 🌙" };
+  }
+}
+
+function updateClock(idPrefix, timeZone, label) {
+  const now = new Date();
+  const tzTime = new Date(now.toLocaleString("en-US", { timeZone }));
+
+  const hours = tzTime.getHours();
+  const minutes = tzTime.getMinutes().toString().padStart(2, "0");
+  const seconds = tzTime.getSeconds().toString().padStart(2, "0");
+
+  document.getElementById(`clock-${idPrefix}`).textContent =
+    hours + ":" + minutes + ":" + seconds;
+
+  document.getElementById(`date-${idPrefix}`).textContent =
+    tzTime.toDateString();
+
+  const phase = getDayPhase(hours);
+  document.getElementById(`phase-${idPrefix}`).textContent =
+    label + " - " + phase.label;
+}
+
+// IST
+setInterval(() => updateClock("ist", "Asia/Kolkata", "IST"), 1000);
+// CT
+setInterval(() => updateClock("ct", "America/Chicago", "CT"), 1000);
+// UTC
+setInterval(() => updateClock("utc", "Etc/UTC", "UTC"), 1000);
 
 
