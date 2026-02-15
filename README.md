@@ -46,4 +46,8 @@ Uses:
 ---
 
 ## 📂 Project Structure
-
+bookbyte/
+├── index.html
+├── style.css
+├── script.js
+└── README.md
