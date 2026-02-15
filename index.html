@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🔖 BookDash</title>
+  <title>🔖 BookByte</title>
   <link rel="icon" type="image/png" href="logo.jpg">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,24 +11,28 @@
 <body class="dark">
   <div class="wrap">
     <header>
-      <h1>🔖 BookDash</h1>
+      <h1>🔖 BookByte</h1>
       <button id="theme-toggle">🌞 Light</button>
     </header>
 
     <!-- Clocks -->
     <div class="clock-row">
       <div class="card">
-        <div class="clock-title">India Standard Time (IST)</div>
+        <div class="clock-title">Indian Standard Time</div>
+        <div id="phase-ist" class="clock-phase"></div> <!-- NEW FIELD -->
         <div id="clock-ist" class="clock-time">--:--:--</div>
         <div id="date-ist" class="clock-date"></div>
       </div>
+
       <div class="card">
-        <div class="clock-title">Central Time (CT)</div>
+         <div class="clock-title">Central Time</div>
+        <div id="phase-ct" class="clock-phase"></div>
         <div id="clock-ct" class="clock-time">--:--:--</div>
         <div id="date-ct" class="clock-date"></div>
       </div>
       <div class="card">
-        <div class="clock-title">Coordinated Universal Time (UTC)</div>
+        <div class="clock-title">Co-ordinated Universal Time</div>
+        <div id="phase-utc" class="clock-phase"></div>
         <div id="clock-utc" class="clock-time">--:--:--</div>
         <div id="date-utc" class="clock-date"></div>
       </div>
@@ -48,9 +52,15 @@
         <input type="text" id="bm-emoji" placeholder="Emoji (📧)" maxlength="2" required>
         <input type="text" id="bm-label" placeholder="Label (Gmail)" required>
         <input type="url" id="bm-url" placeholder="https://example.com" required>
+      </form>
+    </section>
+    <section class="section" id="bookmark-manager">
+      <form id="bookmark-form">
         <button type="submit">Add / Update</button>
         <button type="button" id="bm-clear">Clear All</button>
       </form>
+    </section>
+    <section class="section" id="bookmark-manager">
       <div id="bookmark-list"></div>
     </section>
 
