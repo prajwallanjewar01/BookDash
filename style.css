@@ -63,9 +63,10 @@ body.light {
   padding: 16px;
   border-radius: var(--radius);
   box-shadow: var(--card-glow);
+  text-align: center;
 }
 
-.clock-title { font-size: 12px; color: var(--muted); }
+.clock-title { font-size: 14px; font-weight: bold; color: var(--muted); }
 .clock-time { font-size: 22px; margin-top: 6px; }
 .clock-date { font-size: 12px; color: var(--muted); }
 
@@ -82,6 +83,23 @@ body.light {
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.05);
   color: var(--text);
+  box-shadow: var(--card-glow);
+}
+
+
+.badge {
+  display: inline-flex;        /* helps center text */
+  align-items: center;         /* vertical center */
+  justify-content: center;     /* horizontal center */
+
+  padding: 8px 16px;
+  border-radius: 20px;         /* pill shape */
+  background: var(--surface);  /* or any color */
+  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* soft shadow */
+  
+  font-weight: 500;
+  text-align: center;
 }
 
 .section {
@@ -105,6 +123,7 @@ body.light {
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.05);
   color: var(--text);
+   box-shadow: var(--card-glow);
 }
 
 #bookmark-form button {
@@ -113,6 +132,7 @@ body.light {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  background-color: #4a5568;
 }
 
 #bookmark-list h3 {
@@ -147,4 +167,103 @@ body.light {
 
 a:visited {
   color: inherit; /* Or set it to the same as a:link or a:hover */
+}
+
+.clock-row {
+  display: grid;
+  gap: 16px;
+}
+
+/* Mobile + Tablet */
+@media (max-width: 1024px) {
+  .clock-row {
+    grid-template-columns: 1fr 1fr; /* 2 equal columns */
+  }
+
+  /* Make IST take full width */
+  .clock-row .card:first-child {
+    grid-column: span 2;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .clock-row {
+    grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  }
+}
+
+
+#bookmark-form {
+  display: grid;
+  gap: 16px;
+}
+
+/* 💻 Desktop */
+@media (min-width: 1025px) {
+  #bookmark-form {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  #bookmark-form button {
+    grid-column: span 2; /* buttons take half row */
+  }
+}
+
+/* 📲 Tablet */
+@media (max-width: 1024px) and (min-width: 601px) {
+  #bookmark-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #bookmark-form button {
+    grid-column: span 2; /* buttons full width */
+  }
+}
+
+/* 📱 Mobile */
+@media (max-width: 600px) {
+  #bookmark-form {
+    grid-template-columns: 1fr;
+  }
+}
+button {
+  transition: all 0.2s ease;
+}
+button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+.search input {
+  border: 1px solid var(--muted);
+}
+
+.clock-phase {
+  font-size: 14px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+}
+
+
+
+.wrap {
+  margin: 0 auto;
+  padding: 28px 18px 60px;
+  width: 95%; /* default mobile first */
+}
+
+/* Tablet */
+@media (min-width: 601px) {
+  .wrap {
+    width: 90%;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .wrap {
+    width: 80%;
+    max-width: 1400px;
+  }
 }
