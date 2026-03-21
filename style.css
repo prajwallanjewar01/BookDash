@@ -4,7 +4,7 @@
   --surface-2: #0f141c;
   --text: #e6edf3;
   --muted: #9db0c0;
-  --accent: #7aa2ff;
+  --accent: #4166bd;
   --link: #a3d3ff;
   --card-glow: 0 0 0 1px rgba(122, 162, 255, 0.12), 0 10px 30px rgba(0, 0, 0, 0.35);
   --radius: 14px;
@@ -46,16 +46,9 @@ body.light {
   --surface-2: #f0f3f7;
   --text: #1a1d21;
   --muted: #4a5568;
-  --accent: #3b82f6;
-  --link: #2563eb;
+  --accent: #313ac0d7;
+  --link: #0545d0;
   --card-glow: 0 0 0 1px rgba(59,130,246,0.12), 0 6px 18px rgba(0,0,0,0.08);
-}
-
-.clock-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 14px;
-  margin: 20px 0;
 }
 
 .card {
@@ -105,7 +98,7 @@ body.light {
 .section {
   background: var(--surface);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 20px 30px;
   margin-bottom: 20px;
   box-shadow: var(--card-glow);
 }
@@ -148,6 +141,9 @@ body.light {
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 8px;
+  position: relative;
+  transition: transform 0.2s ease, background 0.2s;
+  cursor: grab;
 }
 
 .link button {
@@ -171,7 +167,9 @@ a:visited {
 
 .clock-row {
   display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
   gap: 16px;
+  margin: 20px 0;
 }
 
 /* Mobile + Tablet */
@@ -231,7 +229,7 @@ button {
   transition: all 0.2s ease;
 }
 button:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   opacity: 0.9;
 }
 .search input {
@@ -265,5 +263,422 @@ button:hover {
   .wrap {
     width: 80%;
     max-width: 1400px;
+  }
+}
+
+
+.converter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Style the result text */
+.result {
+  width: 100%;
+  font-weight: bold;
+  font-size: 18px;       /* increase font size */
+  text-align: center;    /* center horizontally */
+  color: var(--text);    /* follow theme */
+  background: var(--surface-2);  /* optional card-like background */
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: var(--card-glow);
+  margin-top: 0; /* gap already handled by flex gap */
+}
+
+/* Dragging style */
+.link.dragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+/* Drop target highlight */
+.link.drag-over {
+  border: 2px dashed var(--accent);
+}
+
+.link:active {
+  cursor: grabbing;
+}
+
+
+.drag-handle {
+  cursor: grab;
+  margin-right: 8px;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-handle:hover {
+  opacity: 1;
+}
+
+
+
+/* -----------------------------
+   Unified Button Styling
+----------------------------- */
+button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+/* Theme-specific button colors using CSS variables */
+body.dark button {
+  background-color: var(--accent);
+  color: var(--text);
+}
+
+body.light button {
+  background-color: var(--accent);
+  color: var(--text);
+}
+
+button:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+/* Optional: small buttons inside bookmark cards */
+.link button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text);
+  font-weight: bold;
+}
+
+.link button:hover {
+  color: var(--accent);
+}
+
+/* Ensure "Convert" button in converter section follows theme */
+.converter .theme-btn,
+#bookmark-form button {
+  background-color: var(--accent);
+  color: var(--text);
+}
+
+.converter input,
+.converter select,
+.converter button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--muted);
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--card-glow);
+  transition: all 0.2s ease;
+}
+
+.converter button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.clock-timer {
+  font-size: 13px;
+  margin-top: 6px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.countdown-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.countdown-display {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+
+.cd-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+}
+
+.cd-circle {
+  transform: rotate(-90deg);
+}
+
+.cd-circle circle:last-child {
+  transition: stroke-dashoffset 1s linear;
+}
+
+.cd-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.cd-inputs {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  gap: 8px;               /* space between inputs */
+  margin-top: 16px;       /* spacing below the circular timer */
+}
+
+.cd-inputs input {
+  width: 60px;            /* uniform input size */
+  text-align: center;     /* center numbers inside */
+  font-size: 16px;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid var(--muted);
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.cd-imputs, .cd-buttons, .cd-adjust {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cd-buttons button, .cd-adjust button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--accent);
+  color: var(--text);
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.cd-buttons button:hover, .cd-adjust button:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+
+
+/* Wrap the link in a container */
+.link a {
+  position: relative;
+  text-decoration: none;
+}
+
+/* Tooltip text */
+.link a::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  font-size: 12px;
+  box-shadow: var(--card-glow);
+}
+
+/* Show tooltip on hover */
+.link a:hover::after {
+  opacity: 1;
+}
+
+
+/* .converter-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+} */
+
+/* Top row */
+/* .converter-top {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+} */
+
+/* Middle row */
+/* .converter-middle {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+} */
+
+/* Force converter section to stack vertically */
+.converter-wrapper {
+  display: flex;
+  flex-direction: column; /* stack elements vertically */
+  gap: 12px;              /* spacing between each element */
+}
+
+/* Top row: datetime input and Now button stacked */
+.converter-top {
+  display: flex;
+  flex-direction: column; /* vertical stack */
+  gap: 8px;
+}
+
+/* Middle row: From/To dropdowns and Convert button stacked */
+.converter-middle {
+  display: flex;
+  flex-direction: column; /* vertical stack */
+  gap: 8px;
+}
+
+.arrow {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+@media (max-width: 600px) {
+
+  .converter-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .converter-middle {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .arrow {
+    text-align: center;
+  }
+
+  .converter button,
+  .converter select,
+  .converter input {
+    width: 100%;
+  }
+}
+
+/* -----------------------------
+   Time Converter Inputs Styling
+----------------------------- */
+
+.converter-wrapper input,
+.converter-wrapper select,
+.converter-wrapper button {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--muted);
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 500;
+  box-shadow: var(--card-glow);
+  transition: all 0.2s ease;
+  font-family: inherit;
+  width: 100%;           /* full width of container */
+  box-sizing: border-box; /* include padding in width */
+}
+
+/* Hover */
+.converter-wrapper input:hover,
+.converter-wrapper select:hover,
+.converter-wrapper button:hover {
+  border-color: var(--accent);
+}
+
+/* Focus (VERY IMPORTANT UX) */
+.converter-wrapper input:focus,
+.converter-wrapper select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(122, 162, 255, 0.25);
+}
+/* Style calendar icon */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* works for dark mode */
+  cursor: pointer;
+}
+body.light input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0);
+}
+/* Buttons inside converter */
+.converter-wrapper button {
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+}
+
+.converter-wrapper button:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+.converter-wrapper select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+                    linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+  background-position: calc(100% - 15px) calc(50% - 3px),
+                       calc(100% - 10px) calc(50% - 3px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+}
+
+.converter-wrapper input:focus,
+.converter-wrapper select:focus {
+  transform: scale(1.02);
+}
+
+
+#greeting-box {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+#greeting-text {
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+#quote-text {
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+#quote-author {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
