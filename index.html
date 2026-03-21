@@ -15,6 +15,13 @@
       <button id="theme-toggle">🌞 Light</button>
     </header>
 
+    <!-- Greeting Section -->
+<div id="greeting-box" class="card">
+  <h2 id="greeting-text">Loading...</h2>
+  <p id="quote-text">Fetching wisdom...</p>
+  <small id="quote-author"></small>
+</div>
+
     <!-- Clocks -->
     <div class="clock-row">
       <div class="card">
@@ -38,6 +45,44 @@
       </div>
     </div>
 
+    <!-- IST → CT Converter -->
+
+    <section class="section">
+  <h2>⏱️ Time Converter</h2>
+
+  <div class="converter-wrapper">
+
+    <!-- Top line -->
+    <div class="converter-top">
+      <input type="datetime-local" id="time-input" />
+      <button id="now-btn">Now</button>
+    </div>
+
+    <!-- Middle controls -->
+    <div class="converter-middle">
+      <select id="from-tz">
+        <option value="Asia/Kolkata" selected>IST</option>
+        <option value="America/Chicago">CT</option>
+        <option value="UTC">UTC </option>
+      </select>
+      
+      <span class="arrow">→</span>
+      
+      <select id="to-tz">
+        <option value="America/Chicago" selected>CT (Central Time)</option>
+        <option value="UTC">UTC</option>
+        <option value="Asia/Kolkata">IST</option>
+      </select>
+
+      <button id="convert-btn">Convert</button>
+    </div>
+
+    <!-- Output -->
+    <div id="time-output" class="result"></div>
+
+  </div>
+</section>
+
     <!-- Search -->
     <div class="search">
       <input id="filter" class="search-bar" type="search" placeholder="Filter bookmarks…" />
@@ -46,30 +91,49 @@
 
     <!-- Dynamic Bookmark Manager -->
     <section class="section" id="bookmark-manager">
-      <h2>📚 My Bookmarks (Dynamic)</h2>
-      <form id="bookmark-form">
-        <input type="text" id="bm-category" placeholder="Category (e.g. Work)" required>
-        <input type="text" id="bm-emoji" placeholder="Emoji (📧)" maxlength="2" required>
-        <input type="text" id="bm-label" placeholder="Label (Gmail)" required>
-        <input type="url" id="bm-url" placeholder="https://example.com" required>
-      </form>
-    </section>
-    <section class="section" id="bookmark-manager">
-      <form id="bookmark-form">
-        <button type="submit">Add / Update</button>
-        <button type="button" id="bm-clear">Clear All</button>
-      </form>
-    </section>
-    <section class="section" id="bookmark-manager">
-      <div id="bookmark-list"></div>
-    </section>
+  <h2>📚 My Bookmarks (Dynamic)</h2>
+  <form id="bookmark-form">
+    <input type="text" id="bm-category" placeholder="Category (e.g. Work)" required>
+    <input type="text" id="bm-emoji" placeholder="Emoji (📧)" maxlength="2" required>
+    <input type="text" id="bm-label" placeholder="Label (Gmail)" required>
+    <input type="url" id="bm-url" placeholder="https://example.com" required>
+    
+    <button type="submit">Add / Update</button>
+    <button type="button" id="bm-clear">Clear All</button>
+  </form>
+  <div id="bookmark-list"></div>
+</section>
 
-    <!-- Google Calendar -->
-    <!-- <section class="section"> -->
-      <!-- <h2>🗓️ Google Calendar</h2> -->
-      <!-- <iframe src="https://calendar.google.com/calendar" -->
-              <!-- style="border:0" width="100%" height="600" frameborder="0" scrolling="no"></iframe> -->
-    <!-- </section> -->
+  <section class="section" id="countdown-section">
+  <h2>⏳ Countdown Timer</h2>
+  
+  <div class="cd-container">
+    <svg class="cd-circle" width="200" height="200">
+      <circle cx="100" cy="100" r="90" stroke="#7aa2ff" stroke-width="10" fill="none" />
+      <circle cx="100" cy="100" r="90" stroke="#3b82f6" stroke-width="10" fill="none" stroke-dasharray="565.48" stroke-dashoffset="0" />
+    </svg>
+    <div class="cd-display">
+      <span id="cd-time">00:00:00</span>
+    </div>
+  </div>
+
+  <div class="cd-inputs">
+    <input type="number" id="cd-hr" min="0" placeholder="HH" />
+    <input type="number" id="cd-min" min="0" placeholder="MM" />
+    <input type="number" id="cd-sec" min="0" placeholder="SS" />
+  </div>
+
+  <div class="cd-buttons">
+    <button type="button" id="cd-start">Start</button>
+    <button type="button" id="cd-reset">Reset</button>
+    <button type="button" id="cd-stop">Stop</button>
+  </div>
+
+  <div class="cd-adjust">
+    <button id="cd-add">+0.5 min</button>
+    <button id="cd-sub">-0.5 min</button>
+  </div>
+</section>
 
     <div class="footer">
       Tip: Add, edit, or delete bookmarks directly — saved in your browser automatically.
